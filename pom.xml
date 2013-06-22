@@ -1,0 +1,137 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.myapp</groupId>
+	<artifactId>app-parent</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>app parent</name>
+
+	<properties>
+		<spring.version>2.5.6</spring.version>
+		<jtester.version>2.0.1</jtester.version>
+	</properties>
+
+	<modules>
+		<module>app.dto</module>
+		<module>app.basetest</module>
+		<module>app.dao</module>
+		<module>app.service</module>
+		<module>app.web</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- database jar -->
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>1.2.2</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-pool</groupId>
+				<artifactId>commons-pool</artifactId>
+				<version>1.5.4</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.6</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.external</groupId>
+				<artifactId>sourceforge.ibatis</artifactId>
+				<version>2.3.4.726-patch</version>
+			</dependency>
+
+			<!-- spring jar -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<!-- test jar -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.10</version>
+			</dependency>
+			<dependency>
+				<groupId>com.aliyun.jtester</groupId>
+				<artifactId>jtester.junit</artifactId>
+				<version>${jtester.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.aliyun.jtester</groupId>
+				<artifactId>jtester.integrated</artifactId>
+				<version>${jtester.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.aliyun.jtester</groupId>
+				<artifactId>jtester.spec</artifactId>
+				<version>${jtester.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<!-- common jar -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.24</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.15</version>
+				<configuration>
+					<useSystemClassLoader>true</useSystemClassLoader>
+					<testFailureIgnore>true</testFailureIgnore>
+					<parallel>false</parallel>
+					<forkMode>always</forkMode>
+					<test>AllJunit4Test</test>
+					<failIfNoTests>false</failIfNoTests>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<addVersionToProjectName>true</addVersionToProjectName>
+					<downloadSources>true</downloadSources>
+					<projectTextFileEncoding>utf-8</projectTextFileEncoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>utf-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

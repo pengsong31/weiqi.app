@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="phoenix.serviceadapt" version="2.5">
+
+	<display-name>weiqi.app</display-name>
+
+	<!-- 声明spring配置文件 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:spring/app-spring.xml,
+			classpath:spring/wicket-app.xml
+		</param-value>
+	</context-param>
+
+	<filter>
+		<filter-name>WeiQiApplication</filter-name>
+		<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
+		<init-param>
+			<param-name>applicationFactoryClassName</param-name>
+			<param-value>org.apache.wicket.spring.SpringWebApplicationFactory</param-value>
+		</init-param>
+		<init-param>
+			<param-name>filterMappingUrlPattern</param-name>
+			<param-value>/*</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>WeiQiApplication</filter-name>
+		<url-pattern>/app/*</url-pattern>
+		<!-- <dispatcher>REQUEST</dispatcher> -->
+		<!-- <dispatcher>INCLUDE</dispatcher> -->
+	</filter-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+
+	<!-- 负责初始化spring上下文 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+</web-app>
